@@ -1119,6 +1119,7 @@ form input.site-btn {
 .contact-section {
     background: #199ED7;
     color: #fff;
+    scroll-margin-top: 100px;
 }
 
 .contact-section .section-heading {

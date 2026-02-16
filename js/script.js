@@ -373,8 +373,8 @@ if (mediaQuery.matches) {
 
 // Anchor links: scroll to section centered in viewport, accounting for fixed header
 (function () {
-	const header = document.querySelector(".site-header");
 	function getHeaderHeight() {
+		const header = document.querySelector(".site-header");
 		return header ? header.offsetHeight : 0;
 	}
 	function scrollToSectionCentered(el) {
@@ -398,12 +398,20 @@ if (mediaQuery.matches) {
 		scrollToSectionCentered(target);
 		if (id) history.pushState(null, "", "#" + id);
 	});
-	// On load, if URL has hash, scroll to center that section (after a tick so layout is ready)
-	if (window.location.hash) {
-		const id = window.location.hash.slice(1);
+	// On load or navigate with hash, scroll to section after layout is ready
+	function scrollToHash() {
+		const id = (window.location.hash || "").slice(1);
+		if (!id) return;
 		const target = document.getElementById(id);
-		if (target) setTimeout(() => scrollToSectionCentered(target), 100);
+		if (target) scrollToSectionCentered(target);
 	}
+	if (document.readyState === "complete") {
+		setTimeout(scrollToHash, 150);
+	} else {
+		window.addEventListener("load", function () { setTimeout(scrollToHash, 150); });
+	}
+	// Also run on hashchange (e.g. browser back/forward)
+	window.addEventListener("hashchange", scrollToHash);
 })();
 
 // custom individual scoll timing
