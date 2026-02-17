@@ -3817,6 +3817,33 @@ section.site-section.about-section {
         font-size: 36px;
     }
 
+    .main-header .d-flex.justify-space-between {
+        flex-wrap: nowrap;
+    }
+
+    .main-header .site-logo {
+        order: 1;
+        flex-shrink: 0;
+    }
+
+    .main-header .site-logo-title {
+        display: none;
+    }
+
+    .main-header .main-navigation {
+        order: 2;
+        margin-left: auto;
+        margin-right: 24px;
+        flex-shrink: 0;
+    }
+
+    .main-header .hdr-btn {
+        order: 3;
+        margin-left: 0;
+        margin-right: 0;
+        flex-shrink: 0;
+    }
+
     .hdr-btn {
         margin-left: auto;
         margin-right: 35px;
@@ -4473,6 +4500,10 @@ section.site-section.about-section {
 }
 
 @media (max-width:768px) {
+    .site-logo-title {
+        display: none;
+    }
+
     .col-1 {
         width: 100%;
     }
