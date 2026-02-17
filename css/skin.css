@@ -858,8 +858,8 @@ header.site-header.show {
     display: inline-block;
     width: 24px;
     height: 10px;
-    border-top: 2px solid #111;
-    border-bottom: 2px solid #111;
+    border-top: 2px solid #fff;
+    border-bottom: 2px solid #fff;
     margin-left: 7px;
 }
 
@@ -4025,7 +4025,7 @@ section.site-section.about-section {
     }
 
     .site-toggle i {
-        color: #111;
+        color: #fff;
         font-style: normal;
         text-transform: uppercase;
         font-size: 14px;
