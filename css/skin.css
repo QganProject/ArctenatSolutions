@@ -1120,6 +1120,7 @@ form input.site-btn {
     background: #199ED7;
     color: #fff;
     scroll-margin-top: 100px;
+    overflow: visible;
 }
 
 .contact-section .section-heading {
@@ -1210,6 +1211,7 @@ form input.site-btn {
 .contact-form-col {
     flex: 1;
     max-width: 50%;
+    min-width: 0;
 }
 
 .contact-form-card {
@@ -1217,6 +1219,7 @@ form input.site-btn {
     border-radius: 16px;
     padding: 42px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    overflow: visible;
 }
 
 .contact-form-card .form-group {
@@ -3614,10 +3617,6 @@ section.site-section.about-section {
     .hero-content h2 {
         font-size: 56px;
     }
-
-    .contact-section .site-wrapper>.site-row {
-        margin-top: -380px;
-    }
 }
 
 @media (min-width: 2400px) {
@@ -3653,10 +3652,6 @@ section.site-section.about-section {
     .hero-floating-cards {
         width: 380px;
         height: 290px;
-    }
-
-    .contact-section .site-wrapper>.site-row {
-        margin-top: -440px;
     }
 
     .hero-content h2 {
