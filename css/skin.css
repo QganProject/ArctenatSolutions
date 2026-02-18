@@ -4463,15 +4463,50 @@ section.site-section.about-section {
     }
 
     .hero-floating-cards {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: stretch;
+        gap: 16px;
         width: 100%;
-        max-width: 320px;
-        height: 260px;
+        max-width: 100%;
+        height: auto;
         margin: 0 auto;
+        padding: 0 10px;
     }
 
     .hero-cards-bg-ring {
-        width: 200px;
-        height: 200px;
+        display: none;
+    }
+
+    .hero-floating-cards .hero-card {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        transform: none;
+        flex: 1;
+        min-width: 0;
+        max-width: 180px;
+    }
+
+    .hero-floating-cards .hero-card-1,
+    .hero-floating-cards .hero-card-2,
+    .hero-floating-cards .hero-card-3 {
+        animation: hero-float 4s ease-in-out infinite;
+    }
+
+    .hero-floating-cards .hero-card-1 {
+        animation-delay: 0s;
+    }
+
+    .hero-floating-cards .hero-card-2 {
+        animation-delay: 0.5s;
+    }
+
+    .hero-floating-cards .hero-card-3 {
+        animation-delay: 1s;
     }
 
     #slideshow {
@@ -4847,14 +4882,15 @@ section.site-section.about-section {
 
 @media (max-width:567px) {
     .hero-floating-cards {
-        margin-left: 25px;
-        max-width: 280px;
-        height: 220px;
+        flex-direction: row;
+        justify-content: space-evenly;
+        gap: 10px;
+        padding: 0 15px;
+        margin-left: 0;
     }
 
-    .hero-cards-bg-ring {
-        width: 160px;
-        height: 160px;
+    .hero-floating-cards .hero-card {
+        max-width: 110px;
     }
 
     .hero-card {
