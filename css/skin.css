@@ -567,38 +567,47 @@ a.site-logo img {
     z-index: 9999;
 }
 
-/* Hero two-column layout */
+/* Hero: content block centered on screen; space above tagline = space below cards (viewport-relative) */
 .hero-columns {
     position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
+    left: 50%;
+    transform: translateX(-50%);
     bottom: 0;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: 40px;
     width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
+    max-width: 1280px;
     padding: 0 50px;
     z-index: 99;
     box-sizing: border-box;
 }
 
 .hero-column {
-    flex: 1;
+    flex: 0 0 auto;
     min-width: 0;
 }
 
 .hero-column-content {
-    max-width: 55%;
+    flex: 0 1 640px;
+    width: auto;
+    max-width: 640px;
+    min-width: 0;
     position: relative;
     z-index: 999;
 }
 
+/* Keep hero text inside the content column so the whole block can center */
+.hero-columns .hero-column-content .hero-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+}
+
 .hero-column-cards {
-    max-width: 45%;
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4263,7 +4272,7 @@ section.site-section.about-section {
 
 @media (max-width:991px) {
     body {
-        padding-bottom: 78px;
+        padding-bottom: 0;
     }
 
     .services-grid {
@@ -4445,16 +4454,30 @@ section.site-section.about-section {
     .hero-columns {
         position: relative;
         flex-direction: column;
-        padding: 140px 50px 35px;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: 5vh 50px 5vh;
         gap: 35px;
+        left: 0;
+        transform: none;
+    }
+
+    .hero-column {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 100%;
     }
 
     .hero-column-content {
         max-width: 100%;
+        width: 100%;
     }
 
     .hero-column-cards {
         max-width: 100%;
+        width: 100%;
     }
 
     .hero-content {
@@ -4510,6 +4533,7 @@ section.site-section.about-section {
     }
 
     #slideshow {
+        min-height: 100vh;
         height: auto;
     }
 
@@ -4551,6 +4575,23 @@ section.site-section.about-section {
     .contact-info-col,
     .contact-form-col {
         max-width: 100%;
+        width: 100%;
+    }
+
+    .contact-section .contact-form-col {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        max-width: 100%;
+        align-self: stretch;
+        box-sizing: border-box;
+    }
+
+    .contact-section .contact-form-card {
+        flex: 0 1 100%;
+        width: 100%;
+        max-width: 480px;
+        box-sizing: border-box;
     }
 
     .contact-info-content {
