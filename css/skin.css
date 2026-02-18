@@ -4625,12 +4625,57 @@ section.site-section.about-section {
     .contact-section .site-row {
         flex-direction: column;
         gap: 42px;
+        margin-left: 0;
+        margin-right: 0;
     }
 
     .contact-info-col,
     .contact-form-col {
         max-width: 100%;
         width: 100%;
+    }
+
+    .contact-section .contact-info-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .contact-section .contact-info-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* List shrinks to content width so icon+text block centers with equal space left and right */
+    .contact-section .contact-details-list {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: auto;
+        max-width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Icon left, text right; each row full width of the list (so block stays one unit) */
+    .contact-section .contact-detail-item {
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .contact-section .contact-form-col {
@@ -4647,10 +4692,6 @@ section.site-section.about-section {
         width: 100%;
         max-width: 480px;
         box-sizing: border-box;
-    }
-
-    .contact-info-content {
-        padding-right: 0;
     }
 
     .contact-main-title {
