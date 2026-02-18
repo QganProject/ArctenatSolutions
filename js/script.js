@@ -414,10 +414,44 @@ if (mediaQuery.matches) {
 	window.addEventListener("hashchange", scrollToHash);
 })();
 
-// custom individual scoll timing
-setTimeout(() => document.querySelector('.site-header').classList.add('show'), 100);
-setTimeout(() => document.querySelector('.hero-slider').classList.add('show'), 100);
-setTimeout(() => document.querySelector('.hero-slider .hero-content .anchor-div').classList.add('show'), 2000);
+// Hero initial load: blue screen, white blob expands from center to fill screen, then overlay fades; header runs after load is done
+(function () {
+	var slideshow = document.getElementById("slideshow");
+	var heroSlider = document.querySelector(".hero-slider");
+	var loadOverlay = document.getElementById("hero-load-overlay");
+	var HERO_LOAD_EXPAND_MS = 1400;   /* blob expand animation duration */
+	var HERO_LOAD_FADE_MS = 500;     /* overlay fade-out duration */
+	var HEADER_DELAY_AFTER_LOAD_MS = HERO_LOAD_EXPAND_MS + HERO_LOAD_FADE_MS;
+
+	if (loadOverlay && slideshow && heroSlider) {
+		setTimeout(function () {
+			loadOverlay.classList.add("hero-load-done");
+			slideshow.classList.add("show");
+			heroSlider.classList.add("show");
+			setTimeout(function () {
+				var anchorDiv = document.querySelector(".hero-slider .hero-content .anchor-div");
+				if (anchorDiv) anchorDiv.classList.add("show");
+			}, 2000);
+		}, HERO_LOAD_EXPAND_MS);
+		/* Header appears only after load animation and overlay fade are done */
+		setTimeout(function () {
+			var hdr = document.querySelector(".site-header");
+			if (hdr) hdr.classList.add("show");
+		}, HEADER_DELAY_AFTER_LOAD_MS);
+	} else {
+		if (loadOverlay) loadOverlay.classList.add("hero-load-done");
+		if (heroSlider) heroSlider.classList.add("show");
+		if (slideshow) slideshow.classList.add("show");
+		setTimeout(function () {
+			var anchorDiv = document.querySelector(".hero-slider .hero-content .anchor-div");
+			if (anchorDiv) anchorDiv.classList.add("show");
+		}, 2000);
+		setTimeout(function () {
+			var hdr = document.querySelector(".site-header");
+			if (hdr) hdr.classList.add("show");
+		}, 100);
+	}
+})();
 
 
 

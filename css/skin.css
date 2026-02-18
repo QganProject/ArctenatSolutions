@@ -1348,6 +1348,49 @@ form input.site-btn {
     transition: opacity 1.4s ease-out 0.3s;
 }
 
+/* Initial load: full screen blue, white blob in center expands, then overlay fades out */
+.hero-load-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #199ED7;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+.hero-load-overlay.hero-load-done {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: opacity 0.5s ease-out, visibility 0s linear 0.5s;
+}
+
+.hero-load-blob {
+    width: 200px;
+    height: 200px;
+    background: #fff;
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    animation: hero-load-blob-expand 1.4s ease-out forwards;
+    transform-origin: center center;
+    /* Scale to ~15 so 200px blob fills viewport (200*15 = 3000px) */
+}
+
+@keyframes hero-load-blob-expand {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(15);
+        opacity: 1;
+    }
+}
+
+
 .hero-slider.show .blob,
 .hero-slider.show .blob svg,
 #slideshow.show .blob,
@@ -1355,7 +1398,14 @@ form input.site-btn {
     opacity: 1;
 }
 
-/* Secondary blob - transform-only animation (avoids layout thrash from border-radius) */
+/* After load animation, fade in hero content */
+#slideshow.show .hero-columns,
+.hero-slider.show .hero-columns {
+    opacity: 1;
+    transition: opacity 0.6s ease-out 0.2s;
+}
+
+/* Secondary blob - only visible during load animation or after show */
 .blob-outer {
     position: absolute;
     right: -520px;
@@ -1364,11 +1414,16 @@ form input.site-btn {
     width: 280px;
     height: 280px;
     background: #199ED7;
-    opacity: 0.5;
+    opacity: 0;
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
     animation: blob-float 8s ease-in-out infinite;
     z-index: -1;
     contain: layout style paint;
+    transition: opacity 0.4s ease-out;
+}
+
+#slideshow.show .blob-outer {
+    opacity: 0.5;
 }
 
 @keyframes blob-float {
