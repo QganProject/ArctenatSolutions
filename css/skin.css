@@ -567,7 +567,7 @@ a.site-logo img {
     z-index: 9999;
 }
 
-/* Hero: content block centered on screen; space above tagline = space below cards (viewport-relative) */
+/* Hero: content block centered on screen; space above tagline = space below cards. z-index above blobs (0) so text is never covered. */
 .hero-columns {
     position: absolute;
     top: 0;
@@ -582,6 +582,7 @@ a.site-logo img {
     max-width: 1280px;
     padding: 0 50px;
     z-index: 99;
+    isolation: isolate;
     box-sizing: border-box;
 }
 
@@ -596,7 +597,8 @@ a.site-logo img {
     max-width: 640px;
     min-width: 0;
     position: relative;
-    z-index: 999;
+    z-index: 2;
+    isolation: isolate;
 }
 
 /* Keep hero text inside the content column so the whole block can center */
@@ -737,7 +739,7 @@ a.hero-card {
     color: #fff;
     max-width: 100%;
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .hero-tagline {
@@ -791,6 +793,13 @@ a.hero-card {
     color: #199ED7;
     line-height: 1;
     font-family: Caveat;
+}
+
+/* Sub-heading and hero text always above blobs */
+.hero-content p.sub-heading.anim-text,
+.hero-content .anim-text {
+    position: relative;
+    z-index: 3;
 }
 
 .hero-slider .hero-content .anchor-div.show,
@@ -1405,7 +1414,7 @@ form input.site-btn {
     transition: opacity 0.6s ease-out 0.2s;
 }
 
-/* Secondary blob - only visible during load animation or after show */
+/* Secondary blob - behind main blob, hero content stays on top via higher z-index */
 .blob-outer {
     position: absolute;
     right: -520px;
@@ -4344,7 +4353,7 @@ section.site-section.about-section {
         width: 600px;
         height: 600px;
         right: -300px;
-        top: 75%;
+        top: 90%;
         transform: translateY(-50%);
     }
 
@@ -4506,6 +4515,16 @@ section.site-section.about-section {
         display: none;
     }
 
+    /* Keep blobs behind hero text on small viewports */
+    #slideshow .blob,
+    #slideshow .blob svg {
+        z-index: 0;
+    }
+
+    #slideshow .blob-outer {
+        z-index: -1;
+    }
+
     .hero-columns {
         position: relative;
         flex-direction: column;
@@ -4517,6 +4536,7 @@ section.site-section.about-section {
         gap: 35px;
         left: 0;
         transform: none;
+        z-index: 10;
     }
 
     .hero-column {
@@ -4528,6 +4548,8 @@ section.site-section.about-section {
     .hero-column-content {
         max-width: 100%;
         width: 100%;
+        position: relative;
+        z-index: 2;
     }
 
     .hero-column-cards {
@@ -4538,6 +4560,16 @@ section.site-section.about-section {
     .hero-content {
         margin-top: 0;
         margin-bottom: 0;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Sub-heading and all hero text above blobs during blob animation */
+    .hero-content p.sub-heading.anim-text,
+    .hero-content .anim-text,
+    .hero-content h2.anim-text {
+        position: relative;
+        z-index: 3;
     }
 
     .hero-floating-cards {
@@ -5064,20 +5096,6 @@ section.site-section.about-section {
 
     .contact-sub-heading {
         font-size: 28px;
-    }
-
-    .blob svg {
-        width: 500px;
-        height: 500px;
-        right: -250px;
-        top: 75%;
-        transform: translateY(-50%);
-    }
-
-    .blob-outer {
-        width: 180px;
-        height: 180px;
-        right: -420px;
     }
 
     .blob-orb {
